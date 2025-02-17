@@ -1,12 +1,46 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import React from "react";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../config/FirebaseConfig";
+import moment from "moment";
 
 const MedicationActionModal = () => {
+  const route = useRouter();
+
   const medicine = useLocalSearchParams();
-  console.log(medicine);
+
+  const UpdateActionStatus = async (status) => {
+    try {
+      const docRef = doc(db, "medication", medicine?.docId);
+      await updateDoc(docRef, {
+        action: arrayUnion({
+          status: status,
+          time: moment().format("LT"),
+          date: medicine?.selectedDate,
+        }),
+      });
+
+      Alert.alert(status, "Saved.", [
+        {
+          text: "Ok",
+          onPress: () => route.replace("(tabs)"),
+        },
+      ]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -21,12 +55,18 @@ const MedicationActionModal = () => {
       <Text>Its time to take</Text>
 
       <View style={{ marginTop: 15, flexDirection: "row", gap: 15 }}>
-        <TouchableOpacity style={styles.missedBtn}>
+        <TouchableOpacity
+          style={styles.missedBtn}
+          onPress={() => UpdateActionStatus("Missed")}
+        >
           <Ionicons name="close-circle-outline" size={24} color="red" />
           <Text style={{ fontSize: 18, color: "red" }}>Missed</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.takenBtn}>
+        <TouchableOpacity
+          style={styles.takenBtn}
+          onPress={() => UpdateActionStatus("Taken")}
+        >
           <MaterialIcons name="done" size={24} color="green" />
           <Text style={{ fontSize: 18, color: "green" }}>Taken</Text>
         </TouchableOpacity>

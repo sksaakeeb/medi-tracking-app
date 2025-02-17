@@ -19,7 +19,7 @@ import { useRouter } from "expo-router";
 
 const MedicationList = () => {
   const route = useRouter();
-  
+
   const [medList, setMedList] = useState();
   const [dateRange, setDateRange] = useState();
   const [selectedDate, setSelectedDate] = useState(
@@ -107,23 +107,26 @@ const MedicationList = () => {
         )}
       />
 
-     <FlatList
-          onRefresh={() => GetMedicationList(selectedDate)}
-          refreshing={loading}
-          data={medList}
-          renderItem={({ item, index }) => (
-            <TouchableOpacity onPress={() => route.push({
-              pathname: '/action-modal',
-              params: {
-                ...item,
-                selectedDate: selectedDate
-              }
-            })}>
-              <MedicationCardItem medicine={item} />
-            </TouchableOpacity>
-          )}
-        />
-      
+      <FlatList
+        onRefresh={() => GetMedicationList(selectedDate)}
+        refreshing={loading}
+        data={medList}
+        renderItem={({ item, index }) => (
+          <TouchableOpacity
+            onPress={() =>
+              route.push({
+                pathname: "/action-modal",
+                params: {
+                  ...item,
+                  selectedDate: selectedDate,
+                },
+              })
+            }
+          >
+            <MedicationCardItem medicine={item} selectedDate={selectedDate} />
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };

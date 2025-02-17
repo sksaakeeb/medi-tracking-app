@@ -1,8 +1,21 @@
 import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import React, { useState, useEffect } from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 
-const MedicationCardItem = ({ medicine }) => {
+const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    CheckStatus();
+  }, [medicine]);
+
+  const CheckStatus = () => {
+    const data = medicine?.action?.find((item) => item.date == selectedDate);
+    console.log(data);
+    setStatus(data);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
@@ -16,16 +29,32 @@ const MedicationCardItem = ({ medicine }) => {
           />
         </View>
         <View>
-          <Text style={{fontSize: 22, fontWeight: "bold"}}>{medicine?.name}</Text>
+          <Text style={{ fontSize: 22, fontWeight: "bold" }}>
+            {medicine?.name}
+          </Text>
           <Text>{medicine?.when}</Text>
-          <Text>{medicine?.dose} {medicine?.type.name}</Text>
+          <Text>
+            {medicine?.dose} {medicine?.type.name}
+          </Text>
         </View>
       </View>
 
       <View style={styles.reminderContainer}>
-      <Ionicons name="timer-outline" size={24} color="black" />
+        <Ionicons name="timer-outline" size={24} color="black" />
         <Text>{medicine?.reminder}</Text>
       </View>
+
+      {status?.date && (
+        <View style={styles.status}>
+          {status?.status == "Taken" ? (
+            <Feather name="check-circle" size={24} color="green" />
+          ) : (
+            status?.status == "Missed" && (
+              <Feather name="x-circle" size={24} color={"red"} />
+            )
+          )}
+        </View>
+      )}
     </View>
   );
 };
@@ -33,7 +62,7 @@ const MedicationCardItem = ({ medicine }) => {
 export default MedicationCardItem;
 
 const styles = StyleSheet.create({
-  container : {
+  container: {
     padding: 10,
     backgroundColor: "yellow",
     borderRadius: 15,
@@ -41,22 +70,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   imageContainer: {
     padding: 10,
     backgroundColor: "gray",
     borderRadius: 15,
-    marginRight: 10
+    marginRight: 10,
   },
-  subContainer :{
-    flexDirection: 'row',
-    alignItems: "center"
+  subContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   reminderContainer: {
     alignItems: "center",
     padding: 15,
     backgroundColor: "white",
-    borderRadius: 15
-  }
+    borderRadius: 15,
+  },
+  status: {
+    position: "absolute",
+    top: 5,
+    padding: 7,
+  },
 });
