@@ -10,10 +10,10 @@ import MedicationList from "../../components/MedicationList";
 const Home = () => {
   return (
     <FlatList
-    style={{
-      backgroundColor: "white",
-      height: "100%"
-    }}
+      style={{
+        backgroundColor: "white",
+        height: "100%",
+      }}
       data={[]}
       ListHeaderComponent={
         <View style={{ padding: 20, backgroundColor: "white", height: "100%" }}>

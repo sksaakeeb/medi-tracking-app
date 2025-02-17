@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
+import Colors from "../constant/Colors";
 
 const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
   const [status, setStatus] = useState();
@@ -47,10 +48,10 @@ const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
       {status?.date && (
         <View style={styles.status}>
           {status?.status == "Taken" ? (
-            <Feather name="check-circle" size={24} color="green" />
+            <Feather name="check-circle" size={28} color="green" />
           ) : (
             status?.status == "Missed" && (
-              <Feather name="x-circle" size={24} color={"red"} />
+              <Feather name="x-circle" size={28} color={"red"} />
             )
           )}
         </View>
@@ -64,7 +65,7 @@ export default MedicationCardItem;
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: "yellow",
+    backgroundColor: Colors.BLUE,
     borderRadius: 15,
     marginTop: 10,
     flexDirection: "row",
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     padding: 10,
-    backgroundColor: "gray",
+    backgroundColor: "white",
     borderRadius: 15,
     marginRight: 10,
   },

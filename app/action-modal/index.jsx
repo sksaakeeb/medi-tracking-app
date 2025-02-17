@@ -30,9 +30,9 @@ const MedicationActionModal = () => {
         }),
       });
 
-      Alert.alert(status, "Saved.", [
-        {
-          text: "Ok",
+      Alert.alert(status, "Your status has been saved.", [
+        {                         
+          text: "OK",
           onPress: () => route.replace("(tabs)"),
         },
       ]);
@@ -50,9 +50,12 @@ const MedicationActionModal = () => {
           width: 130,
         }}
       />
-      <Text>{medicine?.selectedDate}</Text>
-      <Text>{medicine?.reminder}</Text>
-      <Text>Its time to take</Text>
+      <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+        {medicine?.selectedDate}
+      </Text>
+      <Text style={{ fontSize: 20, fontWeight: "bold", color: "gray" }}>
+        {medicine?.reminder}
+      </Text>
 
       <View style={{ marginTop: 15, flexDirection: "row", gap: 15 }}>
         <TouchableOpacity

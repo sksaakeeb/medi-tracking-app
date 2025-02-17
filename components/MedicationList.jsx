@@ -133,11 +133,11 @@ const MedicationList = () => {
           style={{
             padding: 35,
             textAlign: "center",
-            fontSize: 18,
+            fontSize: 20,
             color: "gray",
           }}
         >
-          Hold on. Loading...
+          No Medications Found.
         </Text>
       )}
     </View>
@@ -148,9 +148,9 @@ export default MedicationList;
 
 const styles = StyleSheet.create({
   dateGroup: {
-    padding: 10,
-    backgroundColor: "gray",
-    marginRight: 10,
+    padding: 15,
+    backgroundColor: Colors.LIGHT_GRAY,
+    marginRight: 7,
     borderRadius: 15,
     alignItems: "center",
     display: "flex",

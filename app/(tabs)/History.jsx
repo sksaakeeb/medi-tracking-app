@@ -165,9 +165,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   dateGroup: {
-    padding: 10,
-    backgroundColor: "gray",
-    marginRight: 10,
+    padding: 15,
+    backgroundColor: Colors.LIGHT_GRAY,
+    marginRight: 7,
     borderRadius: 15,
     alignItems: "center",
     display: "flex",
