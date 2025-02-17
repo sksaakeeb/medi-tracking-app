@@ -31,7 +31,7 @@ const MedicationActionModal = () => {
       });
 
       Alert.alert(status, "Your status has been saved.", [
-        {                         
+        {
           text: "OK",
           onPress: () => route.replace("(tabs)"),
         },
