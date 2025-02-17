@@ -1,9 +1,11 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getLocalStorage } from "../service/Storage";
-import Feather from "@expo/vector-icons/Feather";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from "expo-router";
 
 const Header = () => {
+  const route = useRouter();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -22,24 +24,26 @@ const Header = () => {
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "center",
           alignItems: "center",
-          // justifyContent: "space-between",
-          gap: 10,
+          justifyContent: "space-between",
+          width: "100%"
         }}
       >
+
+        <View style={{display: "flex", flexDirection: "row", alignItems: "center", gap: 10}}>
         <Image
           source={require("../assets/images/smiley.png")}
           style={{ width: 45, height: 45 }}
         />
 
         <Text
-          style={{ fontSize: 18, fontWeight: "bold", alignItems: "center" }}
+          style={{ fontSize: 24, fontWeight: "bold", alignItems: "center" }}
         >
-          Hello, {user?.email} 👋🏻
-        </Text>
+          Hello, {user?.displayName} 👋🏻
+        </Text></View>
 
-        {/* <Feather name="settings" size={24} color="black" /> */}
+<TouchableOpacity onPress={() => route.push('/add-new-medication')}>
+        <Ionicons name="medkit-outline" size={28} color="black" /></TouchableOpacity>
       </View>
     </View>
   );
