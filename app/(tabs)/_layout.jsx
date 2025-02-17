@@ -2,6 +2,7 @@ import { View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Tabs, useRouter } from "expo-router";
 import Feather from "@expo/vector-icons/Feather";
+import AntDesign from '@expo/vector-icons/AntDesign';
 import { getLocalStorage } from "../../service/Storage";
 
 const TabsLayout = () => {
@@ -40,6 +41,17 @@ const TabsLayout = () => {
           ),
         }}
       />
+
+<Tabs.Screen
+        name="History"
+        options={{
+          tabBarLabel: "History",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="clockcircleo" size={size} color={color} />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="Profile"
         options={{

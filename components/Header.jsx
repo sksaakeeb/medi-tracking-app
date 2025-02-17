@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getLocalStorage } from "../service/Storage";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 
 const Header = () => {
@@ -26,24 +26,32 @@ const Header = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          width: "100%"
+          width: "100%",
         }}
       >
-
-        <View style={{display: "flex", flexDirection: "row", alignItems: "center", gap: 10}}>
-        <Image
-          source={require("../assets/images/smiley.png")}
-          style={{ width: 45, height: 45 }}
-        />
-
-        <Text
-          style={{ fontSize: 24, fontWeight: "bold", alignItems: "center" }}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 10,
+          }}
         >
-          Hello, {user?.displayName} 👋🏻
-        </Text></View>
+          <Image
+            source={require("../assets/images/smiley.png")}
+            style={{ width: 45, height: 45 }}
+          />
 
-<TouchableOpacity onPress={() => route.push('/add-new-medication')}>
-        <Ionicons name="medkit-outline" size={28} color="black" /></TouchableOpacity>
+          <Text
+            style={{ fontSize: 20, fontWeight: "bold", alignItems: "center" }}
+          >
+            Hi, {user?.displayName} 👋🏻
+          </Text>
+        </View>
+
+        <TouchableOpacity onPress={() => route.push("/add-new-medication")}>
+          <Ionicons name="medkit-outline" size={28} color="black" />
+        </TouchableOpacity>
       </View>
     </View>
   );

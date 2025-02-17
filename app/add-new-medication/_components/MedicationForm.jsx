@@ -188,7 +188,9 @@ const MedicationForm = () => {
             color="black"
           />
           <Text style={styles.dateInput}>
-            {formatDateText(formData?.startDate) ?? "Start Date"}
+            {formData?.startDate
+              ? formatDateText(formData.startDate)
+              : "Start Date"}
           </Text>
         </TouchableOpacity>
 
@@ -196,13 +198,17 @@ const MedicationForm = () => {
           <RNDateTimePicker
             minimumDate={new Date()}
             onChange={(event) => {
-              onHandleInputChange(
-                "startDate",
-                FormatDate(event.nativeEvent.timestamp)
-              );
+              if (event.nativeEvent.timestamp) {
+                onHandleInputChange(
+                  "startDate",
+                  FormatDate(event.nativeEvent.timestamp)
+                );
+              }
               setShowStartDate(false);
             }}
-            value={new Date(formData?.startDate) ?? new Date()}
+            value={
+              formData?.startDate ? new Date(formData.startDate) : new Date()
+            }
           />
         )}
 
@@ -217,7 +223,7 @@ const MedicationForm = () => {
             color="black"
           />
           <Text style={styles.dateInput}>
-            {formatDateText(formData?.endDate) ?? "End Date"}
+            {formData?.endDate ? formatDateText(formData.endDate) : "End Date"}
           </Text>
         </TouchableOpacity>
 
@@ -225,13 +231,15 @@ const MedicationForm = () => {
           <RNDateTimePicker
             minimumDate={new Date()}
             onChange={(event) => {
-              onHandleInputChange(
-                "endDate",
-                FormatDate(event.nativeEvent.timestamp)
-              );
+              if (event.nativeEvent.timestamp) {
+                onHandleInputChange(
+                  "endDate",
+                  FormatDate(event.nativeEvent.timestamp)
+                );
+              }
               setShowEndDate(false);
             }}
-            value={new Date(formData?.endDate) ?? new Date()}
+            value={formData?.endDate ? new Date(formData.endDate) : new Date()}
           />
         )}
       </View>

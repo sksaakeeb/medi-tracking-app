@@ -14,7 +14,7 @@ import { getLocalStorage } from "../service/Storage";
 import { query, collection, where, getDocs, doc } from "firebase/firestore";
 import { db } from "../config/FirebaseConfig";
 import MedicationCardItem from "./MedicationCardItem";
-import NullStateHome from "../components/NullStateHome";
+// import NullStateHome from "../components/NullStateHome";
 import { useRouter } from "expo-router";
 
 const MedicationList = () => {
@@ -107,26 +107,39 @@ const MedicationList = () => {
         )}
       />
 
-      <FlatList
-        onRefresh={() => GetMedicationList(selectedDate)}
-        refreshing={loading}
-        data={medList}
-        renderItem={({ item, index }) => (
-          <TouchableOpacity
-            onPress={() =>
-              route.push({
-                pathname: "/action-modal",
-                params: {
-                  ...item,
-                  selectedDate: selectedDate,
-                },
-              })
-            }
-          >
-            <MedicationCardItem medicine={item} selectedDate={selectedDate} />
-          </TouchableOpacity>
-        )}
-      />
+      {medList?.length > 0 ? (
+        <FlatList
+          onRefresh={() => GetMedicationList(selectedDate)}
+          refreshing={loading}
+          data={medList}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              onPress={() =>
+                route.push({
+                  pathname: "/action-modal",
+                  params: {
+                    ...item,
+                    selectedDate: selectedDate,
+                  },
+                })
+              }
+            >
+              <MedicationCardItem medicine={item} selectedDate={selectedDate} />
+            </TouchableOpacity>
+          )}
+        />
+      ) : (
+        <Text
+          style={{
+            padding: 35,
+            textAlign: "center",
+            fontSize: 18,
+            color: "gray",
+          }}
+        >
+          Hold on. Loading...
+        </Text>
+      )}
     </View>
   );
 };
