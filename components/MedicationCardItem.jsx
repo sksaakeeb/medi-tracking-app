@@ -2,6 +2,8 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Octicons from "@expo/vector-icons/Octicons";
 import Colors from "../constant/Colors";
 
 const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
@@ -29,7 +31,8 @@ const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
             }}
           />
         </View>
-        <View>
+
+        <View style={{ width: "55%" }}>
           <Text style={{ fontSize: 22, fontWeight: "bold" }}>
             {medicine?.name}
           </Text>
@@ -48,10 +51,10 @@ const MedicationCardItem = ({ medicine, selectedDate = "" }) => {
       {status?.date && (
         <View style={styles.status}>
           {status?.status == "Taken" ? (
-            <Feather name="check-circle" size={28} color="green" />
+            <AntDesign name="checkcircle" size={28} color="green" />
           ) : (
             status?.status == "Missed" && (
-              <Feather name="x-circle" size={28} color={"red"} />
+              <Octicons name="x-circle-fill" size={28} color="red" />
             )
           )}
         </View>
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
   },
   status: {
     position: "absolute",
-    top: 5,
-    padding: 7,
+    padding: 5,
   },
 });

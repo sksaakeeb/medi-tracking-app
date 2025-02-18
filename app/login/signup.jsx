@@ -58,7 +58,7 @@ const SignupScreen = () => {
           );
         } else if (errorCode === "auth/admin-restricted-operation") {
           ToastAndroid.show("Please enter a valid input.", ToastAndroid.LONG);
-        } else if (errorCode === "auth/invalid-email") {
+        } else if (errorCode === "auth/invalid-email" || errorCode === 'auth/missing-email') {
           ToastAndroid.show("Please enter a valid email.", ToastAndroid.LONG);
         }
 
